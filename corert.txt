@@ -1,0 +1,26 @@
+cd /D C:\
+git clone https://github.com/dotnet/corert.git
+cd corert
+build clean release
+
+
+cd /D D:\FiveFifty\ledmaker.org\App\GlowCompiler\GlowCompiler
+set IlcPath=C:\corert\bin\Windows_NT.x64.Release
+dotnet publish -r win-x64               //dotnet publish -r linux-x64
+
+cd /D D:\FiveFifty\ledmaker.org\App\GlowCompiler\GlowCompiler\bin\Debug\netcoreapp2.1\win-x64\native
+glowcompiler.exe -InputFilePath "D:\FiveFifty\ledmaker.org\App\GlowIDE\samples\test.glows" -build
+
+dotnet publish "D:\FiveFifty\ledmaker.org\App\GlowCompiler\GlowCompiler\GlowCompiler.csproj" --self-contained -c Release
+
+
+
+
+<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="$(MSBuildSDKsPath)\Microsoft.NET.Sdk\Sdk\Sdk.props" />
+
+  ...
+
+  <Import Project="$(MSBuildSDKsPath)\Microsoft.NET.Sdk\Sdk\Sdk.targets" />
+  <Import Project="$(IlcPath)\build\Microsoft.NETCore.Native.targets" />
+</Project>

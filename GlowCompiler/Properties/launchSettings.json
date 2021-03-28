@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "GlowCompiler": {
+      "commandName": "Project",
+      "commandLineArgs": "-InputFilePath \"D:\\FiveFifty\\ledmaker.org\\App\\GlowIDE\\samples\\test.glows\" -build"
+    }
+  }
+}
